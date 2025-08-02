@@ -215,7 +215,7 @@ func TestPrintfBranches(t *testing.T) {
 	})
 }
 
-// edge Case tests(additional) .
+// edge Case tests(additional).
 func TestEdgeCases(t *testing.T) {
 	edgeCases := []struct {
 		name   string
