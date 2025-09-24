@@ -6,6 +6,8 @@ import (
 )
 
 func TestMapFromSlice(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name     string
 		input    []string
@@ -44,7 +46,9 @@ func TestMapFromSlice(t *testing.T) {
 	}
 
 	for _, tt := range tests {
+		tt := tt // capture loop variable
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			result := mapFromSlice(tt.input)
 			if !reflect.DeepEqual(result, tt.expected) {
 				t.Errorf("mapFromSlice(%v) = %v, want %v", tt.input, result, tt.expected)
@@ -53,30 +57,9 @@ func TestMapFromSlice(t *testing.T) {
 	}
 }
 
-func TestGlobalVariables(t *testing.T) {
-	// Test global variables are accessible and modifiable
-	profile = "test-profile"
-	if profile != "test-profile" {
-		t.Errorf("profile = %s, want test-profile", profile)
-	}
-
-	skipSteps = []string{"step1", "step2"}
-	if len(skipSteps) != 2 || skipSteps[0] != "step1" || skipSteps[1] != "step2" {
-		t.Errorf("skipSteps = %v, want [step1 step2]", skipSteps)
-	}
-
-	outputFormat = "json"
-	if outputFormat != "json" {
-		t.Errorf("outputFormat = %s, want json", outputFormat)
-	}
-
-	Config = "config.yaml"
-	if Config != "config.yaml" {
-		t.Errorf("Config = %s, want config.yaml", Config)
-	}
-}
-
 func TestMapFromSlice_NilInput(t *testing.T) {
+	t.Parallel()
+
 	result := mapFromSlice(nil)
 	if result == nil {
 		t.Error("mapFromSlice(nil) should not return nil map")
