@@ -67,4 +67,5 @@ func TestMapFromSlice_NilInput(t *testing.T) {
 	if len(result) != 0 {
 		t.Errorf("mapFromSlice(nil) = %v, want empty map", result)
 	}
+
 }
